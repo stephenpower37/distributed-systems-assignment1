@@ -59,6 +59,18 @@ export class RestAPIStack extends cdk.Stack {
       }
     );
 
+    const newMovieReviewFn = new lambdanode.NodejsFunction(this, "AddMovieReviewFn", {
+      architecture: lambda.Architecture.ARM_64,
+      runtime: lambda.Runtime.NODEJS_16_X,
+      entry: `${__dirname}/../lambdas/addMovieReview.ts`,
+      timeout: cdk.Duration.seconds(10),
+      memorySize: 128,
+      environment: {
+        TABLE_NAME: movieReviewsTable.tableName,
+        REGION: "eu-west-1",
+      },
+    });
+
     const getAllMoviesFn = new lambdanode.NodejsFunction(
       this,
       "GetAllMoviesFn",
@@ -140,6 +152,7 @@ export class RestAPIStack extends cdk.Stack {
     moviesTable.grantReadWriteData(deleteMovieFn)
     movieCastsTable.grantReadData(getMovieCastMembersFn);
     movieCastsTable.grantReadWriteData(getMovieByIdFn);
+    movieReviewsTable.grantReadWriteData(newMovieReviewFn)
 
     // REST API 
     const api = new apig.RestApi(this, "RestAPI", {
@@ -183,5 +196,12 @@ export class RestAPIStack extends cdk.Stack {
       "GET",
       new apig.LambdaIntegration(getMovieCastMembersFn, { proxy: true })
     );
+
+    const movieReviewsEndpoint = api.root.addResource("movieReviews");
+    movieReviewsEndpoint.addMethod(
+      "POST",
+      new apig.LambdaIntegration(newMovieReviewFn, { proxy: true })
+    );
+
   }
 }
