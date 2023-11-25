@@ -20,7 +20,7 @@ export const reviews: Review[] = [
         content: "I thought the movie dragged on and was very slow paced"
     },
     {
-        movieId: 2910,
+        movieId: 8773,
         reviewerName: "anonymous404",
         reviewDate: "24/10/2023",
         content: "I enjoyed this movie, but it felt like it was over before I knew it"
@@ -32,13 +32,13 @@ export const reviews: Review[] = [
         content: "I enjoyed most of the movie, but the ending was a let down"
     },
     {
-        movieId: 3877,
+        movieId: 3878,
         reviewerName: "cormacosullivan2023",
         reviewDate: "30/09/2023",
         content: "I thought the movie was very long and could have easily been concised"
     },
     {
-        movieId: 2910,
+        movieId: 1872,
         reviewerName: "joemaxwell510",
         reviewDate: "19/02/2023",
         content: "I thought this movie was excellent and it was nice and concise"
@@ -50,7 +50,7 @@ export const reviews: Review[] = [
         content: "Really enjoyed this movie"
     },
     {
-        movieId: 9091,
+        movieId: 8531,
         reviewerName: "maxverstappen33",
         reviewDate: "09/07/2023",
         content: "Brilliant movie with a great cast"
